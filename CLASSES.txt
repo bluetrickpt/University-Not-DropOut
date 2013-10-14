@@ -39,7 +39,7 @@ HIPSTERS: Literature Department
 	(3x3) Indie Band Concert
 	(4x4) Steampunk Museum
 
-	- Antiquarium;
+	- Antiquarium, Classic movie theatre;
 
 PREPPIES: Tech Department
 
@@ -49,53 +49,49 @@ PREPPIES: Tech Department
 	(4x4) Country-Club
 
 	-Sports Car Dealership, Iacht Party;
+
+UNIVERSITY EVALUATION TEAM
+	
+	(2X2) 
+	(2X2) Whoters
+	(3X3) 
+	(4X4) 
+	
 	
 
 /********************************************/
 
 HILL-BILLIES: Agriculture Department
 
-	(2x2)
-	(2x2)
-	(3x3)
-	(4x4)
+	(2x2) 
+	(2x2) Ol' Randy's Dinner
+	(3x3) Moonshine Brewer
+	(4x4) Cattle Ranch
+
+	- Ku Klux Klan Meeting Center;
 
 POT HEADS: Chemistry Department
 
-	(2x2)
-	(2x2)
-	(3x3)
-	(4x4)
+	(2x2) Public restroom
+	(2x2) Black Castle
+	(3x3) Fairly suspicious RV park
+	(4x4) Burning Man
 
 GOTHS: Arts Department
 
-	(2x2)
-	(2x2)
-	(3x3)
-	(4x4)
+	(2x2) Dark Alley
+	(2x2) 
+	(3x3) Abbandoned Church
+	(4x4) 
 
 WEABOOS: Foreign Studies Department
 
-	(2x2)
-	(2x2)
-	(3x3)
-	(4x4)
+	(2x2) Manga&Anime Store
+	(2x2) Yoko-chan's Ramen
+	(3x3) 
+	(4x4) Cosplay Convention
 
-RASTAFARIANS: Bothanics Department
-	
-	(2x2)
-	(2x2)
-	(3x3)
-	(4x4)
-
-NO-LIFES: Medicine Department
-
-	(2x2)
-	(2x2)
-	(3x3)
-	(4x4)
-
-Poin Dexters: Physics Department
+POIN DEXTERS: Physics Department
 
 	(2x2)
 	(2x2)
@@ -104,8 +100,7 @@ Poin Dexters: Physics Department
 
 TUNERS: Mechanics Department
 
-	(2x2)
-	(2x2)
-	(3x3)
-	(4x4)
-
+	(2x2) Chop Shop
+	(2x2) Truck Stop
+	(3x3) Low Rider Show
+	(4x4) Drag Race Tracks
