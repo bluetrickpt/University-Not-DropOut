@@ -1,0 +1,111 @@
+CLASSES:
+
+/******************************/
+Sample:	[Name] Department:
+
+	(2x2) edificio pequeno
+	(2x2) restaurante
+	(3x3) edificio medio
+	(4x4) edificio grande
+	
+	- [outras ideias]
+
+/******************************/
+
+/********************************************/
+
+Classes iniciais:
+
+NERDS: Tech Department
+
+	(2x2) Gaming Store
+	(2x2) McRonalds
+	(3x3) Medieval Fair
+	(4x4) Sci-fi Convention
+
+JOCKS: Sports Department
+
+	(2x2) Gym
+	(2x2) Beer Bar
+	(3x3) Football Field
+	(4x4) Sports Stadium
+
+	- Frat House Party;
+
+HIPSTERS: Literature Department
+
+	(2x2) Vintage book store
+	(2x2) StarDucks
+	(3x3) Indie Band Concert
+	(4x4) Steampunk Museum
+
+	- Antiquarium;
+
+PREPPIES: Tech Department
+
+	(2x2) Lacrosse Field
+	(2x2) "Le Beaucoup D'argent
+	(3x3) Mall
+	(4x4) Country-Club
+
+	-Sports Car Dealership, Iacht Party;
+	
+
+/********************************************/
+
+HILL-BILLIES: Agriculture Department
+
+	(2x2)
+	(2x2)
+	(3x3)
+	(4x4)
+
+POT HEADS: Chemistry Department
+
+	(2x2)
+	(2x2)
+	(3x3)
+	(4x4)
+
+GOTHS: Arts Department
+
+	(2x2)
+	(2x2)
+	(3x3)
+	(4x4)
+
+WEABOOS: Foreign Studies Department
+
+	(2x2)
+	(2x2)
+	(3x3)
+	(4x4)
+
+RASTAFARIANS: Bothanics Department
+	
+	(2x2)
+	(2x2)
+	(3x3)
+	(4x4)
+
+NO-LIFES: Medicine Department
+
+	(2x2)
+	(2x2)
+	(3x3)
+	(4x4)
+
+Poin Dexters: Physics Department
+
+	(2x2)
+	(2x2)
+	(3x3)
+	(4x4)
+
+TUNERS: Mechanics Department
+
+	(2x2)
+	(2x2)
+	(3x3)
+	(4x4)
+
