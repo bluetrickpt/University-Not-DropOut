@@ -9,6 +9,10 @@ Sample:	[Name] Department:
 	(4x4) edificio grande
 	
 	- [outras ideias]
+	
+HILL-BILLIES:
+
+	(2x2) "Dentist"
 
 /******************************/
 
@@ -63,7 +67,7 @@ UNIVERSITY EVALUATION TEAM
 
 HILL-BILLIES: Agriculture Department
 
-	(2x2) 
+	(2x2) "Dentist"
 	(2x2) Ol' Randy's Dinner
 	(3x3) Moonshine Brewer
 	(4x4) Cattle Ranch
@@ -80,21 +84,21 @@ POT HEADS: Chemistry Department
 GOTHS: Arts Department
 
 	(2x2) Dark Alley
-	(2x2) 
-	(3x3) Abbandoned Church
-	(4x4) 
+	(2x2) RestaurART
+	(3x3) Cemetery
+	(4x4) Crepuscular fan club
 
 WEABOOS: Foreign Studies Department
 
-	(2x2) Manga&Anime Store
+	(2x2) Manga & Anime Store
 	(2x2) Yoko-chan's Ramen
-	(3x3) 
+	(3x3) Dakimakura meeting
 	(4x4) Cosplay Convention
 
 POIN DEXTERS: Physics Department
 
-	(2x2)
-	(2x2)
+	(2x2) 
+	(2x2) 
 	(3x3)
 	(4x4)
 
