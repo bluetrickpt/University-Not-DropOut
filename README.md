@@ -1,2 +1,13 @@
 University-Not-DropOut
 ======================
+
+##Platform: ?
+
+##Team:
+...
+...
+...
+...
+(fill in with your details)
+
+##Couceiro's wage: 25k / month
