@@ -16,10 +16,11 @@ public class Assets {
 	}
 	
 	private void loadTiles(){
-		Sprite tile1 = new Sprite(new Texture(Gdx.files.internal("data/t1.png")));
-		Sprite tile2 = new Sprite(new Texture(Gdx.files.internal("data/t2.png")));
+		for(int i=0;i<100;i++){
+			if(Gdx.files.internal(i+".png").exists()){
+				tiles_rep.put( i, new Sprite(new Texture(Gdx.files.internal(i+".png"))));
+			}
+		}
 		
-		tiles_rep.put( 1, tile1);
-		tiles_rep.put( 2, tile2);
 	}
 }

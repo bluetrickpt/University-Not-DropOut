@@ -14,7 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 
-public class View implements Screen,TileClickListener{
+public class View implements Screen{
 	private Stage stage;
 	private Table env_container,pl_container;
 	
@@ -55,6 +55,18 @@ public class View implements Screen,TileClickListener{
 		
 		tileWidth = Univndout.w / xlim;
 		tileHeight = Univndout.h / ylim;
+		
+		if(Inflater.hasLocalMatrix()){
+			env_tiles = Inflater.inflateMatrix(xlim, ylim);
+			
+			for(int i = 0;i<ylim;i++){
+				for(int j = 0;j<xlim;j++){
+					if(env_tiles[i][j] != 0){
+						addTile(env_tiles[i][j],j,i,false);
+					}
+				}
+			}
+		}
 	}
 	
 	public void addTile(int type,Vector2 pos,boolean walkable){
@@ -69,17 +81,10 @@ public class View implements Screen,TileClickListener{
 		}
 		else this.walk_tiles[x][y] = 0;
 		
-		Vector2 isoPos = Univndout.cartToIso(new Vector2(x,y));
-		Tile test = new Tile(type,this);
+		Vector2 isoPos = Univndout.cartToIso(new Vector2(x-0.5f,y+0.5f));
+		Tile test = new Tile(type);
 		test.setPosition(isoPos.x * tileWidth,isoPos.y *  tileHeight);
 		env_container.addActor(test);
-		
-		LabelStyle lblstyle = new LabelStyle();
-		lblstyle.font = font;
-		
-		Label lbl = new Label("("+x+";"+y+")",lblstyle);
-		lbl.setPosition(isoPos.x * tileWidth,isoPos.y *  tileHeight);
-		env_container.addActor(lbl);
 	}
 	
 	@Override
@@ -161,29 +166,4 @@ public class View implements Screen,TileClickListener{
 		float y = (float) (isoPos.y / tileHeight);
 		return new Vector2(x,y);
 	}
-
-	@Override
-	public void tileClickDown(int x, int y, Tile tile) {
-		// TODO Auto-generated method stub
-		//Gdx.app.log("DOWN", tile.type + "");
-	}
-
-	@Override
-	public void tileEnter(int x, int y, Tile tile) {
-		// TODO Auto-generated method stub
-		//Gdx.app.log("Enter", tile.type + "");
-	}
-
-	@Override
-	public void tileClickUp(int x, int y, Tile tile) {
-		// TODO Auto-generated method stub
-		//Gdx.app.log("UP", tile.type + "");
-	}
-
-	@Override
-	public void tileExit(int x, int y, Tile tile) {
-		// TODO Auto-generated method stub
-		//Gdx.app.log("Exit", tile.type + "");
-	}
-
 }

@@ -25,7 +25,7 @@ public class Univndout extends Game {
 		batch.setProjectionMatrix(camera.combined);
 		shape_r = new ShapeRenderer();
 		
-		//new Assets();//generate assets
+		new Assets();//generate assets
 		testView = new View(10,10);
 		setScreen(testView);
 	}
