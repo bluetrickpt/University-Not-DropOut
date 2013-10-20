@@ -3,16 +3,16 @@ CLASSES:
 /******************************/
 Sample:	[Name] Department:
 
-	(2x2) edificio pequeno
-	(2x2) restaurante
-	(3x3) edificio medio
-	(4x4) edificio grande
+	(3x3) edificio pequeno
+	(3x3) restaurante
+	(4x4) edificio medio
+	(5x5) edificio grande
 	
 	- [outras ideias]
 	
 HILL-BILLIES:
 
-	(2x2) "Dentist"
+	(3x3) "Dentist"
 
 /******************************/
 
@@ -22,44 +22,44 @@ Classes iniciais:
 
 NERDS: Tech Department
 
-	(2x2) Gaming Store
-	(2x2) McRonalds
-	(3x3) Medieval Fair
-	(4x4) Sci-fi Convention
+	(3x3) Gaming Store
+	(3x3) McRonalds
+	(4x4) Medieval Fair
+	(5x5) Sci-fi Convention
 
 JOCKS: Sports Department
 
-	(2x2) Gym
-	(2x2) Beer Bar
-	(3x3) Football Field
-	(4x4) Sports Stadium
+	(3x3) Gym
+	(3x3) Beer Bar
+	(4x4) Football Field
+	(5x5) Sports Stadium
 
 	- Frat House Party;
 
 HIPSTERS: Literature Department
 
-	(2x2) Vintage book store
-	(2x2) StarDucks
-	(3x3) Indie Band Concert
-	(4x4) Steampunk Museum
+	(3x3) Vintage book store
+	(3x3) StarDucks
+	(4x4) Indie Band Concert
+	(5x5) Steampunk Museum
 
 	- Antiquarium, Classic movie theatre;
 
 PREPPIES: Tech Department
 
-	(2x2) Lacrosse Field
-	(2x2) "Le Beaucoup D'argent
-	(3x3) Mall
-	(4x4) Country-Club
+	(3x3) Lacrosse Field
+	(3x3) "Le Beaucoup D'argent
+	(4x4) Mall
+	(5x5) Country-Club
 
 	-Sports Car Dealership, Iacht Party;
 
 UNIVERSITY EVALUATION TEAM
 	
-	(2X2) 
-	(2X2) Whoters
 	(3X3) 
+	(3X3) Whoters
 	(4X4) 
+	(5X5) 
 	
 	
 
@@ -67,44 +67,44 @@ UNIVERSITY EVALUATION TEAM
 
 HILL-BILLIES: Agriculture Department
 
-	(2x2) "Dentist"
-	(2x2) Ol' Randy's Dinner
-	(3x3) Moonshine Brewer
-	(4x4) Cattle Ranch
+	(3x3) "Dentist"
+	(3x3) Ol' Randy's Dinner
+	(4x4) Moonshine Brewer
+	(5x5) Cattle Ranch
 
 	- Ku Klux Klan Meeting Center;
 
 POT HEADS: Chemistry Department
 
-	(2x2) Public restroom
-	(2x2) Black Castle
-	(3x3) Fairly suspicious RV park
-	(4x4) Burning Man
+	(3x3) Public restroom
+	(3x3) Black Castle
+	(4x4) Fairly suspicious RV park
+	(5x5) Burning Man
 
 GOTHS: Arts Department
 
-	(2x2) Dark Alley
-	(2x2) RestaurART
-	(3x3) Cemetery
-	(4x4) Crepuscular fan club
+	(3x3) Dark Alley
+	(3x3) RestaurART
+	(4x4) Cemetery
+	(5x5) Crepuscular fan club
 
 WEABOOS: Foreign Studies Department
 
-	(2x2) Manga & Anime Store
-	(2x2) Yoko-chan's Ramen
-	(3x3) Dakimakura meeting
-	(4x4) Cosplay Convention
+	(3x3) Manga & Anime Store
+	(3x3) Yoko-chan's Ramen
+	(4x4) Dakimakura meeting
+	(5x5) Cosplay Convention
 
 POIN DEXTERS: Physics Department
 
-	(2x2) 
-	(2x2) 
-	(3x3)
+	(3x3) 
+	(3x3) 
 	(4x4)
+	(5x5)
 
 TUNERS: Mechanics Department
 
-	(2x2) Chop Shop
-	(2x2) Truck Stop
-	(3x3) Low Rider Show
-	(4x4) Drag Race Tracks
+	(3x3) Chop Shop
+	(3x3) Truck Stop
+	(4x4) Low Rider Show
+	(5x5) Drag Race Tracks
