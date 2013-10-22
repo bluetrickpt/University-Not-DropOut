@@ -4,19 +4,19 @@ SOUNDS
 #Deixar aqui alguns links para sons que podemos usar no jogo:
 
 #MENUS
-####CLICK - http://opengameart.org/content/menu-selection-click
-####      - http://opengameart.org/content/zippo-click-sound
-####INGAME - http://opengameart.org/content/picked-coin-echo
+CLICK - (http://opengameart.org/content/menu-selection-click)
+      - (http://opengameart.org/content/zippo-click-sound)
+INGAME - (http://opengameart.org/content/picked-coin-echo)
 
 #IN-GAME
-##AMBIENCE
-####RAIN - http://opengameart.org/content/rain-ambient-not-loopable-2-versions-available
-####WAVES - http://opengameart.org/content/beach-ocean-waves
-####FIRE -http://opengameart.org/content/fire-crackling
-####CREEPY - http://opengameart.org/content/eeryhorror-sfx
-####CLAPPING - http://opengameart.org/content/well-done
-####BUILDING DONE - http://opengameart.org/content/jump-landing-sound
+#AMBIENCE
+RAIN - (http://opengameart.org/content/rain-ambient-not-loopable-2-versions-available)
+WAVES - (http://opengameart.org/content/beach-ocean-waves)
+FIRE - (http://opengameart.org/content/fire-crackling)
+CREEPY - (http://opengameart.org/content/eeryhorror-sfx)
+CLAPPING - (http://opengameart.org/content/well-done)
+BUILDING DONE - (http://opengameart.org/content/jump-landing-sound)
 
 
 #INSTRUMENTOS
-####GUITAR (para character / mission toggle) - http://opengameart.org/content/guitar-0
+GUITAR [para character / mission toggle] - (http://opengameart.org/content/guitar-0)
