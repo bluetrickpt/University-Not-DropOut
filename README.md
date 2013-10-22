@@ -9,7 +9,7 @@ Procrastinate-U
 ####In the game, it is your sole occupation to make these students do exactly the opposite of that!
 
 ####For instance, it may sound simple to drag the Jocks away from the classroom and onto the sports field, but are you up for the task when the time comes to lure a Nerd away from the books?
-###Will the way you play be tempting enough for the students (from a wide array of types) to completely avoid classes and blow their money on parallel activities?
+####Will the way you play be tempting enough for the students (from a wide array of types) to completely avoid classes and blow their money on parallel activities?
 
 #TEAM:
 ####Pilipe Lopes
