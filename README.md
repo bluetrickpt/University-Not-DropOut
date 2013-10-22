@@ -1,6 +1,5 @@
-PROCRASTINATE-U
-===============
 ![alt text](https://si0.twimg.com/profile_images/1327463722/ProcrastinateU.jpg "Procastinate-U")
+######(Não sei como estamos de copyright na imagem, mas achei bué piada!)
 
 #PLATFORM: Android
 
