@@ -1,7 +1,7 @@
-Procrastinate-U
+PROCRASTINATE-U
 ======================
 
-##PLATFORM: Android / Desktop (?) / iOS (?)
+#PLATFORM: Android (Discuss others)
 
 #DESCRIPTION:
 ####College. The definition itself of the place where one becomes a more grown-up individual, where one's life becomes to eat, study, sleep and repeat.
@@ -12,7 +12,7 @@ Procrastinate-U
 ####Will the way you play be tempting enough for the students (from a wide array of types) to completely avoid classes and blow their money on parallel activities?
 
 #TEAM:
-####Pilipe Lopes
+####Pilipe(tm) Lopes
 ####Francisco Couceiro
 ####Jorge Monteiro
 ####Pedro Duarte
