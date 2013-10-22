@@ -9,6 +9,9 @@ CLICK - (http://opengameart.org/content/menu-selection-click)
 INGAME - (http://opengameart.org/content/picked-coin-echo)
 
 #IN-GAME
+#INTERFACE
+PAUSE - (http://opengameart.org/content/pick-up-item-yo-frankie)
+
 #AMBIENCE
 RAIN - (http://opengameart.org/content/rain-ambient-not-loopable-2-versions-available)
 WAVES - (http://opengameart.org/content/beach-ocean-waves)

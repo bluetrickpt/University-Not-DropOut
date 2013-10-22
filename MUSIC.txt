@@ -1,0 +1,16 @@
+MUSIC
+======
+
+#Deixar aqui alguns links para músicas que podemos usar no jogo:
+
+#INTRO
+BUSINESS - http://opengameart.org/sites/default/files/Time%20to%20business%2C%20guys.mp3
+
+#REGULAR
+GRAY TRIP - http://opengameart.org/sites/default/files/Gray%20Trip_0.mp3
+LIFE INSTRUMENT - http://opengameart.org/sites/default/files/Life_Instr.mp3
+HAPPY ARCADE - http://opengameart.org/sites/default/files/happy_0.mp3
+
+#OLD STYLE
+http://opengameart.org/sites/default/files/funny_track_with_ringtone_effects_c64_style_0.ogg
+http://opengameart.org/sites/default/files/bg1.mp3
