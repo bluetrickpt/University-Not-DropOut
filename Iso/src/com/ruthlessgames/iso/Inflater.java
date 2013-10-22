@@ -29,7 +29,7 @@ public class Inflater {
 				
 				for( j=0;j<xlim;j++){
 					Element curTile = curRow.getChildByName("col" + j);
-					matrix[j][i] = curTile.getInt("tile_type");
+					matrix[i][j] = curTile.getInt("tile_type");
 				}
 			}
 		} catch (IOException e) {

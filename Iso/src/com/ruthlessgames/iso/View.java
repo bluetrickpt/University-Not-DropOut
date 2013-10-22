@@ -1,6 +1,7 @@
 package com.ruthlessgames.iso;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
@@ -12,6 +13,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -29,13 +31,16 @@ public class View implements Screen{
 	private CameraController controller;
 	private GestureDetector gestureDetector;
 	
-	int env_tiles[][],pl_tiles[][],walk_tiles[][];
+	int env_tiles[][];
 	int xlim,ylim;
 	static float tileWidth;
 	static float tileHeight;
 	
 	BitmapFont font;
 	ShapeRenderer shape_r;
+	
+	Tile selected = null;
+	Tile moveable = null;
 	
 	public View(int xlim,int ylim){
 		setupStage();
@@ -44,6 +49,8 @@ public class View implements Screen{
 	
 	private void setupStage(){
 		stage = new Stage();
+		stage.addListener(tileBaseListener);
+		
 		env_container = new Table();
 		env_container.setFillParent(true);
 		pl_container = new Table();
@@ -63,11 +70,11 @@ public class View implements Screen{
 		
 		//create the tile grid
 		env_tiles = new int[xlim][ylim];
-		pl_tiles = new int[xlim][ylim];
-		walk_tiles = new int[xlim][ylim];
 		
 		tileWidth = Iso.w / xlim;
 		tileHeight = Iso.h / ylim;
+		
+		this.addGround();
 		
 		if(Inflater.hasLocalMatrix()){
 			Gdx.app.log("Inflater", "Inflated");
@@ -76,7 +83,7 @@ public class View implements Screen{
 			for(int i = 0;i<ylim;i++){
 				for(int j = 0;j<xlim;j++){
 					if(env_tiles[i][j] != 0){
-						addTile(env_tiles[i][j],j,i,true);
+						addTile(env_tiles[i][j],j,i);
 					}
 				}
 			}
@@ -85,31 +92,22 @@ public class View implements Screen{
 			Gdx.app.log("Inflater", "Not inflated");
 	}
 	
-	public void addTile(int type,Vector2 pos,boolean walkable){
-		this.addTile(type, (int)(pos.x),(int)(pos.y), walkable);
+	public void addTile(int type,Vector2 pos){
+		this.addTile(type, (int)(pos.x),(int)(pos.y));
 	}
 	
-	public void addTile(int type,int x,int y,boolean walkable){
+	public void addTile(int type,int x,int y){
 		this.env_tiles[x][y] = type;
-		
-		if(walkable){
-			this.walk_tiles[x][y] = 1;
-		}
-		else this.walk_tiles[x][y] = 0;
 		
 		Vector2 isoPos = Iso.cartToIso(new Vector2(x-1.5f,y+0.5f));
 		Tile test;
-		if(type == 7)
-			test = new Tile(type,2,2);
-		else
-		test = new Tile(type,4,4);
+		
+		test = new Tile(type,2,2);
 		
 		test.setPosition(isoPos.x * tileWidth,isoPos.y *  tileHeight);
 		
-		if(walkable)
 		env_container.addActor(test);
-		else 
-			pl_container.addActor(test);
+		
 	}
 	
 	@Override
@@ -120,22 +118,16 @@ public class View implements Screen{
 		((OrthographicCamera)this.stage.getCamera()).update();
 		controller.update();
 		
-		
-//		shape_r.begin(ShapeType.Line);
-//		this.debugIsoView();
-//		shape_r.end();
-		
 		//update stage
 		stage.act(delta);
 		stage.draw();
 		
-		
-		//this.debugPos();
-		
-		if(Gdx.input.isKeyPressed(Keys.W)) this.zoomIn();
-		else if(Gdx.input.isKeyPressed(Keys.S)) this.zoomOut();
-		else if(Gdx.input.isKeyPressed(Keys.A)) this.moveLeft();
-		else if(Gdx.input.isKeyPressed(Keys.D)) this.moveRight();
+		if(Gdx.app.getType() == ApplicationType.Desktop){
+			if(Gdx.input.isKeyPressed(Keys.W)) this.zoomIn();
+			else if(Gdx.input.isKeyPressed(Keys.S)) this.zoomOut();
+			else if(Gdx.input.isKeyPressed(Keys.A)) this.moveLeft();
+			else if(Gdx.input.isKeyPressed(Keys.D)) this.moveRight();
+		}
 	}
 
 	private void zoomIn()
@@ -159,12 +151,11 @@ public class View implements Screen{
 	private void addGround(){
 		for(int i = 0;i<ylim;i++){
 			for(int j = 0;j<xlim;j++){
-				
-					addTile(7,j,i,false);
-				
+					addTile(7,j,i);
 			}
 		}
 	}
+	
 	private void debugPos(){
 		//debug matrix pos
 		Vector2 cartPos = Iso.isoToCart(View.getTileCoordinates(new Vector2(Gdx.input.getX(),Iso.h - Gdx.input.getY())));
@@ -199,10 +190,11 @@ public class View implements Screen{
 	public void show() {
 		// TODO Auto-generated method stub
 		InputMultiplexer input_p = new InputMultiplexer();
-		input_p.addProcessor(stage);
 		input_p.addProcessor(gestureDetector);
+		input_p.addProcessor(stage);
+		
 		Gdx.input.setInputProcessor(input_p);
-		this.addGround();
+		
 	}
 
 	@Override
@@ -252,6 +244,9 @@ public class View implements Screen{
 		@Override
 		public boolean tap (float x, float y, int count, int button) {
 			Gdx.app.log("GestureDetectorTest", "tap at " + x + ", " + y + ", count: " + count);
+			if(selected != null){
+				selected.getColor().a = 1;
+			}
 			return false;
 		}
 
@@ -302,4 +297,58 @@ public class View implements Screen{
 			}
 		}
 	}
+	
+	private EventListener tileBaseListener = new ActorGestureListener(){
+		@Override
+		public void tap(InputEvent event,
+			       float x,
+			       float y,
+			       int count,
+			       int button){
+			
+			Actor act = stage.hit(x, y, true);
+			
+			if(act != null && act.getClass() == Tile.class){
+				if(moveable == null){
+					if(selected!=null){
+						selected.getColor().a = 1;
+					}
+					
+					act.getColor().a = 0.7f;
+					selected = (Tile)act;
+				}
+				else{
+					
+					Vector2 pos_ant = View.getTileCoordinates(new Vector2(act.getX(),act.getY()));
+					moveable.setPosition(tileWidth * pos_ant.x,tileHeight *pos_ant.y);
+					env_container.removeActor(act);
+					moveable.getColor().r = 1;
+					moveable.getColor().g = 1;
+					moveable.getColor().b = 1;
+					moveable.getColor().a = 1f;
+					moveable = null;
+				}
+			}
+			
+		
+		}
+		
+		@Override
+		public boolean longPress(Actor actor,
+                float x,
+                float y){
+			
+				Actor act = stage.hit(x, y, true);
+			
+				if(act != null && act.getClass() == Tile.class && moveable == null){
+					moveable = (Tile)act;
+					moveable.getColor().r = 0.7f;
+					moveable.getColor().g = 0f;
+					moveable.getColor().b = 0;
+					return true;
+				}
+			return false;
+			
+		}
+	};
 }
