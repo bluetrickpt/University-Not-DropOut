@@ -210,16 +210,41 @@ public class View implements Screen{
 		return x+";"+y;
 	}
 	
-	private void hit(int x,int y){
+	private void hitSelectTile(int x,int y){
 		Tile act = hitHash.get(getKey(x,y));
-		if(act != null){
-			if(selected != null) selected.deselect();
+		if(act != null && act.isActive){
+			if (moveable == null) {
+				if (selected != null)
+					selected.deselect();
+				selected = act;
+				selected.select();
+			}
 			
-			selected = act;
-			selected.select();
+		}
+		else{
+			if(moveable != null && !act.isActive){
+			moveable.setPosition(act.getX(), act.getY());
+			moveable.deselect();
+			hitHash.remove(moveable);
+			hitHash.put(getKey(x,y), moveable);
+			moveable = null;
+			}
 		}
 	}
 
+	private void hitMoveableTile(int x,int y){
+		Tile act = hitHash.get(getKey(x,y));
+		if(act != null){
+			if(moveable == null){
+				if(selected != null)
+				selected.deselect();
+				
+				selected = null;
+				moveable = act;
+				act.move();
+			}
+		}
+	}
 	
 	class CameraController implements GestureListener {
 		float velX, velY;
@@ -231,23 +256,24 @@ public class View implements Screen{
 			flinging = false;
 			initialScale = camera.zoom;
 			
-			 Vector3 worldCoordinates = new Vector3(x, y, 0);
-			 ((OrthographicCamera)stage.getCamera()).unproject(worldCoordinates);
-			Vector2 cartPos = Iso.isoToCart(View.getTileCoordinates(new Vector2(worldCoordinates.x,worldCoordinates.y)));
-			View.this.hit((int)cartPos.x, (int)cartPos.y);
-			
 			return false;
 		}
 
 		@Override
 		public boolean tap (float x, float y, int count, int button) {
-			Gdx.app.log("GestureDetectorTest", "tap at " + x + ", " + y + ", count: " + count);
+			 Vector3 worldCoordinates = new Vector3(x, y, 0);
+			 ((OrthographicCamera)stage.getCamera()).unproject(worldCoordinates);
+			Vector2 cartPos = Iso.isoToCart(View.getTileCoordinates(new Vector2(worldCoordinates.x,worldCoordinates.y)));
+			View.this.hitSelectTile((int)cartPos.x, (int)cartPos.y);
 			return false;
 		}
 
 		@Override
 		public boolean longPress (float x, float y) {
-			Gdx.app.log("GestureDetectorTest", "long press at " + x + ", " + y);
+			 Vector3 worldCoordinates = new Vector3(x, y, 0);
+			 ((OrthographicCamera)stage.getCamera()).unproject(worldCoordinates);
+			Vector2 cartPos = Iso.isoToCart(View.getTileCoordinates(new Vector2(worldCoordinates.x,worldCoordinates.y)));
+			View.this.hitMoveableTile((int)cartPos.x, (int)cartPos.y);
 			return false;
 		}
 
