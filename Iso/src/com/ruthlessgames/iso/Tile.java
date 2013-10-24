@@ -16,16 +16,20 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class Tile extends Image{
 
 	int type;
+	boolean isActive;
 	
-	
-	public Tile(int type,int w,int h) {
+	public Tile(int type,boolean isActive) {
 		super((Drawable)null);
 	
 		this.changeDrawable(type);
 		this.type = type;
-		
+		this.isActive = isActive;
 		//update size
-		this.setSize(w*View.tileWidth, h*View.tileHeight);
+		switch(type){
+		default:
+			this.setSize(View.tileWidth, View.tileHeight);
+		}
+		
 	}
 	
 

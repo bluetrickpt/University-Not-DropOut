@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -27,7 +28,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 
 public class View implements Screen{
 	private Stage stage;
-	private Table env_container,pl_container;
+	private Table env_container;
 	private CameraController controller;
 	private GestureDetector gestureDetector;
 	
@@ -49,16 +50,13 @@ public class View implements Screen{
 	
 	private void setupStage(){
 		stage = new Stage();
-		stage.addListener(tileBaseListener);
 		
 		env_container = new Table();
 		env_container.setFillParent(true);
-		pl_container = new Table();
-		pl_container.setFillParent(true);
-		stage.addActor(pl_container);
+		
 		stage.addActor(env_container);
 		controller= new CameraController();
-		gestureDetector = new GestureDetector(20, 0.5f, 2, 0.15f, controller);
+		gestureDetector = new GestureDetector(30, 0.5f, 0.5f, 0.15f, controller);
 		
 		font = new BitmapFont();
 		shape_r = Iso.shape_r;
@@ -83,7 +81,7 @@ public class View implements Screen{
 			for(int i = 0;i<ylim;i++){
 				for(int j = 0;j<xlim;j++){
 					if(env_tiles[i][j] != 0){
-						addTile(env_tiles[i][j],j,i);
+						addTile(env_tiles[i][j],j,i,true);
 					}
 				}
 			}
@@ -92,17 +90,15 @@ public class View implements Screen{
 			Gdx.app.log("Inflater", "Not inflated");
 	}
 	
-	public void addTile(int type,Vector2 pos){
-		this.addTile(type, (int)(pos.x),(int)(pos.y));
+	public void addTile(int type,Vector2 pos,boolean isActive){
+		this.addTile(type, (int)(pos.x),(int)(pos.y),isActive);
 	}
 	
-	public void addTile(int type,int x,int y){
+	public void addTile(int type,int x,int y,boolean isActive){
 		this.env_tiles[x][y] = type;
 		
-		Vector2 isoPos = Iso.cartToIso(new Vector2(x-1.5f,y+0.5f));
-		Tile test;
-		
-		test = new Tile(type,2,2);
+		Vector2 isoPos = Iso.cartToIso(new Vector2(x,y));
+		Tile test = new Tile(type,isActive);
 		
 		test.setPosition(isoPos.x * tileWidth,isoPos.y *  tileHeight);
 		
@@ -115,68 +111,44 @@ public class View implements Screen{
 		// TODO Auto-generated method stub
 		Gdx.gl.glClearColor(0.5f, 0.6f, 0, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT); 
+		
+		//update camera and its controller
 		((OrthographicCamera)this.stage.getCamera()).update();
 		controller.update();
-		
+		shape_r.setProjectionMatrix(stage.getSpriteBatch().getProjectionMatrix());
+		this.debugIsoView();
 		//update stage
 		stage.act(delta);
 		stage.draw();
 		
-		if(Gdx.app.getType() == ApplicationType.Desktop){
-			if(Gdx.input.isKeyPressed(Keys.W)) this.zoomIn();
-			else if(Gdx.input.isKeyPressed(Keys.S)) this.zoomOut();
-			else if(Gdx.input.isKeyPressed(Keys.A)) this.moveLeft();
-			else if(Gdx.input.isKeyPressed(Keys.D)) this.moveRight();
-		}
 	}
+	
+	private void debugIsoView(){
+		shape_r.begin(ShapeType.Line);
+		  for(int i=0;i<ylim;i++){
+		   //env_tiles[i][0] -> env_tiles[i][xlim-1];
+		   Vector2 from = Iso.cartToIso(new Vector2(i,0));
+		   Vector2 to = Iso.cartToIso(new Vector2(i,xlim-1));
 
-	private void zoomIn()
-	{
-	    ((OrthographicCamera)this.stage.getCamera()).zoom += .05;
-	}
-	
-	private void zoomOut()
-	{
-	    ((OrthographicCamera)this.stage.getCamera()).zoom -= .05;
-	}
-	
-	private void moveLeft(){
-		((OrthographicCamera)this.stage.getCamera()).translate(1.5f, 0);
-	}
-	
-	private void moveRight(){
-		((OrthographicCamera)this.stage.getCamera()).translate(-1.5f, 0);
-	}
+		   shape_r.line(from.x * tileWidth, from.y * tileHeight, to.x * tileWidth, to.y * tileHeight);
+		  }
+		  
+		  for(int i=0;i<xlim;i++){
+		   //env_tiles[0][i] -> env_tiles[ylim -1,i];
+		   Vector2 from = Iso.cartToIso(new Vector2(0,i));
+		   Vector2 to = Iso.cartToIso(new Vector2(ylim-1,i));
+
+		   shape_r.line(from.x * tileWidth, from.y * tileHeight, to.x * tileWidth, to.y * tileHeight);
+		  }
+		  
+		  shape_r.end();
+		 }
 	
 	private void addGround(){
 		for(int i = 0;i<ylim;i++){
 			for(int j = 0;j<xlim;j++){
-					addTile(7,j,i);
+					addTile(7,i,j,false);
 			}
-		}
-	}
-	
-	private void debugPos(){
-		//debug matrix pos
-		Vector2 cartPos = Iso.isoToCart(View.getTileCoordinates(new Vector2(Gdx.input.getX(),Iso.h - Gdx.input.getY())));
-		System.out.println("(" + (int)cartPos.x + ";" + (int)cartPos.y + ")");
-	}
-	
-	private void debugIsoView(){
-		for(int i=0;i<ylim;i++){
-			//env_tiles[i][0] -> env_tiles[i][xlim-1];
-			Vector2 from = Iso.cartToIso(new Vector2(i,0));
-			Vector2 to = Iso.cartToIso(new Vector2(i,xlim-1));
-
-			shape_r.line(from.x * tileWidth, from.y * tileHeight, to.x * tileWidth, to.y * tileHeight);
-		}
-		
-		for(int i=0;i<xlim;i++){
-			//env_tiles[0][i] -> env_tiles[ylim -1,i];
-			Vector2 from = Iso.cartToIso(new Vector2(0,i));
-			Vector2 to = Iso.cartToIso(new Vector2(ylim-1,i));
-
-			shape_r.line(from.x * tileWidth, from.y * tileHeight, to.x * tileWidth, to.y * tileHeight);
 		}
 	}
 	
@@ -222,8 +194,8 @@ public class View implements Screen{
 	}
 	
 	public static Vector2 getTileCoordinates(Vector2 isoPos){
-		float x = (float) (isoPos.x / tileWidth);
-		float y = (float) (isoPos.y / tileHeight);
+		float x = (isoPos.x / tileWidth);
+		float y = (isoPos.y / tileHeight);
 		return new Vector2(x,y);
 	}
 	
@@ -238,15 +210,18 @@ public class View implements Screen{
 		public boolean touchDown (float x, float y, int pointer, int button) {
 			flinging = false;
 			initialScale = camera.zoom;
+			
+			 Vector3 worldCoordinates = new Vector3(x, y, 0);
+			 ((OrthographicCamera)stage.getCamera()).unproject(worldCoordinates);
+			Vector2 cartPos = Iso.isoToCart(View.getTileCoordinates(new Vector2(worldCoordinates.x,worldCoordinates.y)));
+			System.out.println("(" + (int)cartPos.x + ";" + (int)cartPos.y + ")");
+			
 			return false;
 		}
 
 		@Override
 		public boolean tap (float x, float y, int count, int button) {
 			Gdx.app.log("GestureDetectorTest", "tap at " + x + ", " + y + ", count: " + count);
-			if(selected != null){
-				selected.getColor().a = 1;
-			}
 			return false;
 		}
 
@@ -297,58 +272,4 @@ public class View implements Screen{
 			}
 		}
 	}
-	
-	private EventListener tileBaseListener = new ActorGestureListener(){
-		@Override
-		public void tap(InputEvent event,
-			       float x,
-			       float y,
-			       int count,
-			       int button){
-			
-			Actor act = stage.hit(x, y, true);
-			
-			if(act != null && act.getClass() == Tile.class){
-				if(moveable == null){
-					if(selected!=null){
-						selected.getColor().a = 1;
-					}
-					
-					act.getColor().a = 0.7f;
-					selected = (Tile)act;
-				}
-				else{
-					
-					Vector2 pos_ant = View.getTileCoordinates(new Vector2(act.getX(),act.getY()));
-					moveable.setPosition(tileWidth * pos_ant.x,tileHeight *pos_ant.y);
-					env_container.removeActor(act);
-					moveable.getColor().r = 1;
-					moveable.getColor().g = 1;
-					moveable.getColor().b = 1;
-					moveable.getColor().a = 1f;
-					moveable = null;
-				}
-			}
-			
-		
-		}
-		
-		@Override
-		public boolean longPress(Actor actor,
-                float x,
-                float y){
-			
-				Actor act = stage.hit(x, y, true);
-			
-				if(act != null && act.getClass() == Tile.class && moveable == null){
-					moveable = (Tile)act;
-					moveable.getColor().r = 0.7f;
-					moveable.getColor().g = 0f;
-					moveable.getColor().b = 0;
-					return true;
-				}
-			return false;
-			
-		}
-	};
 }
