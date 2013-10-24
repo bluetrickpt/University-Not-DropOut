@@ -1,8 +1,8 @@
-Lixtah de senas ke faltam por no joguh:
+Lista de implementações a fazer:
 
 - Recusar tile move se o destino já estiver ocupado;
 - Recusar tile move para a mesma posição (continuar a pedir nova colocação);
 - Recusar tile move do "contentor" da relva;
 - Dimensionar edificios de modo a ocupar x por x grids que nao obstrua as tiles;
 
----
+--- KEEP 'EM COMING ---
