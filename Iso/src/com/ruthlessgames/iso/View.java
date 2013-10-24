@@ -1,5 +1,7 @@
 package com.ruthlessgames.iso;
 
+import java.util.HashMap;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Input.Keys;
@@ -42,6 +44,7 @@ public class View implements Screen{
 	
 	Tile selected = null;
 	Tile moveable = null;
+	HashMap<String,Tile> hitHash;
 	
 	public View(int xlim,int ylim){
 		setupStage();
@@ -56,10 +59,12 @@ public class View implements Screen{
 		
 		stage.addActor(env_container);
 		controller= new CameraController();
-		gestureDetector = new GestureDetector(30, 0.5f, 0.5f, 0.15f, controller);
+		gestureDetector = new GestureDetector(10, 0.5f, 0.5f, 0.15f, controller);
 		
 		font = new BitmapFont();
 		shape_r = Iso.shape_r;
+		
+		hitHash = new HashMap<String,Tile>();
 	}
 	
 	private void setupContent(int xlim,int ylim){
@@ -97,13 +102,13 @@ public class View implements Screen{
 	public void addTile(int type,int x,int y,boolean isActive){
 		this.env_tiles[x][y] = type;
 		
-		Vector2 isoPos = Iso.cartToIso(new Vector2(x,y));
-		Tile test = new Tile(type,isActive);
+		Vector2 isoPos = Iso.cartToIso(new Vector2(x-0.5f,y+0.5f));
+		Tile newTile = new Tile(type,isActive);
 		
-		test.setPosition(isoPos.x * tileWidth,isoPos.y *  tileHeight);
+		newTile.setPosition((isoPos.x)* tileWidth,(isoPos.y)*  tileHeight);
 		
-		env_container.addActor(test);
-		
+		env_container.addActor(newTile);
+		hitHash.put(getKey(x,y), newTile);
 	}
 	
 	@Override
@@ -115,8 +120,9 @@ public class View implements Screen{
 		//update camera and its controller
 		((OrthographicCamera)this.stage.getCamera()).update();
 		controller.update();
-		shape_r.setProjectionMatrix(stage.getSpriteBatch().getProjectionMatrix());
-		this.debugIsoView();
+		
+		//this.debugIsoView();
+		
 		//update stage
 		stage.act(delta);
 		stage.draw();
@@ -124,6 +130,7 @@ public class View implements Screen{
 	}
 	
 	private void debugIsoView(){
+		shape_r.setProjectionMatrix(stage.getSpriteBatch().getProjectionMatrix());
 		shape_r.begin(ShapeType.Line);
 		  for(int i=0;i<ylim;i++){
 		   //env_tiles[i][0] -> env_tiles[i][xlim-1];
@@ -199,6 +206,19 @@ public class View implements Screen{
 		return new Vector2(x,y);
 	}
 	
+	private String getKey(int x,int y){
+		return x+";"+y;
+	}
+	
+	private void hit(int x,int y){
+		Tile act = hitHash.get(getKey(x,y));
+		if(act != null){
+			if(selected != null) selected.deselect();
+			
+			selected = act;
+			selected.select();
+		}
+	}
 
 	
 	class CameraController implements GestureListener {
@@ -214,7 +234,7 @@ public class View implements Screen{
 			 Vector3 worldCoordinates = new Vector3(x, y, 0);
 			 ((OrthographicCamera)stage.getCamera()).unproject(worldCoordinates);
 			Vector2 cartPos = Iso.isoToCart(View.getTileCoordinates(new Vector2(worldCoordinates.x,worldCoordinates.y)));
-			System.out.println("(" + (int)cartPos.x + ";" + (int)cartPos.y + ")");
+			View.this.hit((int)cartPos.x, (int)cartPos.y);
 			
 			return false;
 		}

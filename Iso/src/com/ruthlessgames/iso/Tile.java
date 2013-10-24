@@ -27,7 +27,7 @@ public class Tile extends Image{
 		//update size
 		switch(type){
 		default:
-			this.setSize(View.tileWidth, View.tileHeight);
+			this.setSize(2*View.tileWidth, 2*View.tileHeight);
 		}
 		
 	}
@@ -46,5 +46,21 @@ public class Tile extends Image{
 		return View.getTileCoordinates(new Vector2(this.getX(),this.getY()));
 	}
 	
+	public void select(){
+		this.getColor().a = 0.7f;
+	}
 	
+	public void move(){
+		this.getColor().r = 0.7f;
+		this.getColor().g = 1f;
+		this.getColor().b = 1f;
+		this.getColor().a = 1f;
+	}
+	
+	public void deselect(){
+		this.getColor().r = 1f;
+		this.getColor().g = 1f;
+		this.getColor().b = 1f;
+		this.getColor().a = 1f;
+	}
 }
